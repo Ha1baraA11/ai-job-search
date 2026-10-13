@@ -179,6 +179,11 @@ def h2_headings(text):
     return [line.strip() for line in text.splitlines() if line.startswith("## ")]
 
 
+def framework_version(text):
+    match = re.search(r"^framework_version:\s*(\S+)\s*$", text, re.MULTILINE)
+    return match.group(1) if match else None
+
+
 class TestResetTargetsTheHeadingsTheShippedFilesHave(unittest.TestCase):
     """Step 3's skeletons and anchors must name sections that exist.
 
@@ -240,6 +245,35 @@ class TestResetTargetsTheHeadingsTheShippedFilesHave(unittest.TestCase):
                 block_start = step.index("```markdown") + len("```markdown")
                 block = step[block_start: step.index("```", block_start)]
                 self.assertIn(anchor, block, f"the replacement for {filename} must keep the heading {anchor!r}")
+
+
+class TestProfileResetKeepsFrameworkMarkersAndPlaceholders(unittest.TestCase):
+    def setUp(self):
+        self.reset = RESET.read_text(encoding="utf-8")
+
+    def test_profile_skeletons_keep_the_shipped_framework_version(self):
+        for filename in ("01-candidate-profile.md", "02-behavioral-profile.md"):
+            with self.subTest(file=filename):
+                shipped = (SKILL_DIR / filename).read_text(encoding="utf-8")
+                replacement = skeleton_block(self.reset, filename)
+                self.assertIsNotNone(framework_version(shipped))
+                self.assertEqual(
+                    framework_version(replacement),
+                    framework_version(shipped),
+                    f"/reset's replacement for {filename} must retain its framework_version frontmatter",
+                )
+
+    def test_candidate_skeleton_keeps_setup_and_ci_placeholders(self):
+        replacement = skeleton_block(self.reset, "01-candidate-profile.md")
+        for marker in ("[YOUR_NAME]", "[YOUR_EMAIL]", "### Languages", "| [DEGREE] |"):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, replacement)
+
+    def test_behavioral_skeleton_keeps_profile_placeholders(self):
+        replacement = skeleton_block(self.reset, "02-behavioral-profile.md")
+        for marker in ("[YOUR_NAME]", "[PROFILE_TYPE]", "[DRIVE_1]", "[BEHAVIOR_1]"):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, replacement)
 
 if __name__ == "__main__":
     unittest.main()

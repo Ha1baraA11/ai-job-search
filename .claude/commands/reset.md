@@ -141,49 +141,83 @@ Wait for the user's response.
 **For `01-candidate-profile.md`**, replace the file content with:
 
 ```markdown
+---
+framework_version: 1.1.1
+---
+
 # Candidate Profile
 
 <!-- Run /setup to populate this file -->
 
 ## Identity
+- **Name:** [YOUR_NAME]
+- **Email:** [YOUR_EMAIL]
+
+### Languages
+
+| Language | Level | Notes |
+|----------|-------|-------|
+| [LANGUAGE] | [LEVEL] | [NOTES] |
 
 ## Education
+| Degree | Period | Institution | Key Topics |
+|--------|--------|-------------|------------|
+| [DEGREE] | [YEARS] | [INSTITUTION] | [TOPICS] |
 
 ## Professional Experience
+### [JOB_TITLE] - [COMPANY] ([START] - [END])
+- [RESPONSIBILITY_OR_ACHIEVEMENT]
 
 ## Independent Projects
+- **[PROJECT_NAME]**: [DESCRIPTION]
 
 ## Technical Skills
+- [SKILLS]
 
 ## Publications
+- [PUBLICATION]
 
 ## Awards
+- [AWARD]
 
 ## References
+- [REFERENCE]
 ```
 
 **For `02-behavioral-profile.md`**, replace the file content with:
 
 ```markdown
+---
+framework_version: 1.0.0
+---
+
 # Behavioral Profile
 
 <!-- Run /setup to populate this file -->
 
 ## Overview
+[YOUR_NAME]'s behavioral assessment identifies them as a **[PROFILE_TYPE]** pattern. [1-2 SENTENCE_SUMMARY].
 
 ## Core Behavioral Drives
+- [DRIVE_1]: [LEVEL] - [DESCRIPTION]
 
 ## Strongest Behaviors
+- **[BEHAVIOR_1]:** [DESCRIPTION]
 
 ## How You Work Best
+- [ENVIRONMENT_PREFERENCE]
 
 ## Growth Areas (frame positively in applications)
+- **[AREA]:** [HOW_TO_FRAME_IT_POSITIVELY]
 
 ## Mapping to Job Posting Language
+- [MATCHING_KEYWORD]
 
 ## Management Style Preferences
+- [MANAGEMENT_STYLE_PREFERENCE]
 
 ## Using This in Applications
+- [APPLICATION_EXAMPLE]
 ```
 
 **For `04-job-evaluation.md`**, restore the values `/setup` Step 3.4 personalized back to their placeholder tokens, leaving every surrounding line untouched:
